@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Joyeux Anniversaire Sylvie! | 3 Mai</title>
+    
+    <!-- Polices Google -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Great+Vibes&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            background: linear-gradient(135deg, #fff5f7 0%, #ffe4ec 50%, #fff0f5 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+            color: #4a3548;
+            line-height: 1.6;
+        }
+
+        /* Conteneur principal */
+        .container {
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        /* Section Hero - Date */
+        .hero {
+            text-align: center;
+            padding: 60px 20px 30px;
+            animation: fadeInDown 1.2s ease-out;
+        }
+
+        .hero-date {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(4rem, 12vw, 6rem);
+            font-weight: 700;
+            color: #d4789c;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .hero-subtitle {
+            font-family: 'Great Vibes', cursive;
+            font-size: clamp(2rem, 6vw, 3rem);
+            color: #e8a0b5;
+            margin-bottom: 15px;
+        }
+
+        .hero-name {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.2rem, 3vw, 1.5rem);
+            color: #6b4d5d;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+
+        /* Séparateur */
+        .separator {
+            text-align: center;
+            padding: 20px 0;
+            color: #e8a0b5;
+            font-size: 1.2rem;
+        }
+
+        .separator::before,
+        .separator::after {
+            content: ' ✿ ';
+            color: #f0c0d0;
+        }
+
+        /* Voeux */
+        .wishes {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            padding: 20px 0 40px;
+        }
+
+        .wish-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 4px 15px rgba(212, 120, 156, 0.1);
+            border: 1px solid #fce4ec;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .wish-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+            transition: all 0.8s ease;
+        }
+
+        .wish-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(212, 120, 156, 0.15);
+        }
+
+        .wish-emoji {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        .wish-text {
+            font-size: clamp(1rem, 2vw, 1.1rem);
+            font-style: italic;
+            color: #5a4050;
+            line-height: 1.7;
+        }
+
+        /* Lettre */
+        .letter-section {
+            padding: 40px 0 60px;
+        }
+
+        .letter-frame {
+            background: white;
+            border: 2px solid #f0c0d0;
+            border-radius: 20px;
+            padding: 40px 30px;
+            box-shadow: 0 0 0 8px rgba(255, 245, 247, 0.8), 0 0 0 16px rgba(255, 240, 245, 0.5), 0 10px 30px rgba(212, 120, 156, 0.1);
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .letter-frame.visible {
+            opacity: 1;
+            transform: translateY(0);
+            transition: all 1s ease;
+        }
+
+        .letter-greeting {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.3rem, 3vw, 1.5rem);
+            font-weight: 600;
+            font-style: italic;
+            color: #d4789c;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .letter-body {
+            font-size: clamp(0.95rem, 2vw, 1.05rem);
+            color: #5a4050;
+            line-height: 1.8;
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .letter-body em {
+            color: #d4789c;
+            font-style: italic;
+            font-weight: 500;
+        }
+
+        .letter-signature {
+            font-family: 'Great Vibes', cursive;
+            font-size: clamp(1.5rem, 4vw, 1.8rem);
+            color: #e8a0b5;
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .hearts {
+            text-align: center;
+            margin-top: 15px;
+            color: #f0c0d0;
+            font-size: 0.9rem;
+            letter-spacing: 0.3em;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 20px;
+            color: #b08a9a;
+            font-style: italic;
+            font-size: 0.9rem;
+            padding-bottom: 40px;
+        }
+
+        /* Animations */
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+            
+            .hero {
+                padding: 40px 15px 20px;
+            }
+            
+            .letter-frame {
+                padding: 25px 20px;
+                box-shadow: 0 0 0 5px rgba(255, 245, 247, 0.8), 0 0 0 10px rgba(255, 240, 245, 0.5), 0 8px 20px rgba(212, 120, 156, 0.1);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-date {
+                font-size: 3rem;
+            }
+            
+            .wish-card {
+                padding: 20px 18px;
+            }
+            
+            .letter-frame {
+                padding: 20px 15px;
+                border-radius: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Hero Section -->
+        <header class="hero">
+            <h1 class="hero-date">May 3</h1>
+            <div class="hero-subtitle">Happy Birthday</div>
+            <div class="hero-name">Sylvie ARINLOYE</div>
+        </header>
+
+        <!-- Séparateur -->
+        <div class="separator"></div>
+
+        <!-- Voeux -->
+        <section class="wishes">
+            <div class="wish-card">
+                <div class="wish-emoji">✨</div>
+                <p class="wish-text">Que cette journée spéciale soit remplie de moments de pure joie et de belles surprises qui réchauffent votre cœur.</p>
+            </div>
+            
+            <div class="wish-card">
+                <div class="wish-emoji">🌸</div>
+                <p class="wish-text">Je vous souhaite une année à venir débordante d'amour, de rires et des abondantes bénédictions de Dieu en toute saison.</p>
+            </div>
+            
+            <div class="wish-card">
+                <div class="wish-emoji">💝</div>
+                <p class="wish-text">Merci d'être une source de sagesse, de chaleur et d'inspiration — une tante vraiment exceptionnelle.</p>
+            </div>
+            
+            <div class="wish-card">
+                <div class="wish-emoji">🕊️</div>
+                <p class="wish-text">Que ce jour et chaque jour vous apportent le bonheur, la paix et l'épanouissement que vous méritez tant.</p>
+            </div>
+        </section>
+
+        <!-- Séparateur -->
+        <div class="separator"></div>
+
+        <!-- Lettre -->
+        <section class="letter-section">
+            <div class="letter-frame">
+                <div class="letter-greeting">Dear Aunt,</div>
+                <p class="letter-body">
+                    On this special day as you celebrate your birthday, I pray that the Lord grants you even stronger health. May He fill you with His grace and allow you to enjoy the fruits of your labor. Thank you for being exceptional to me and my brothers. May Almighty God also bless you exceptionally and grant you growth from <em>glory to glory</em>. In the name of Jesus Christ! <strong>Amen!</strong>
+                </p>
+                <div class="letter-signature">Avec tout mon amour</div>
+                <div class="hearts">♥ ♥ ♥</div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            Fait avec amour, depuis l'autre côté de l'océan 🌊
+        </footer>
+    </div>
+
+    <script>
+        // Animation au défilement
+        function revealOnScroll() {
+            const cards = document.querySelectorAll('.wish-card');
+            const letter = document.querySelector('.letter-frame');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            });
+
+            // Observer les cartes de voeux
+            cards.forEach(card => {
+                observer.observe(card);
+            });
+
+            // Observer la lettre
+            if (letter) {
+                observer.observe(letter);
+            }
+        }
+
+        // Démarrer l'observation quand la page est chargée
+        document.addEventListener('DOMContentLoaded', function() {
+            revealOnScroll();
+            
+            // Message dans la console
+            console.log('🌸 Joyeux Anniversaire Sylvie! 🌸');
+            console.log('Avec tout mon amour depuis la France 💕');
+        });
+    </script>
+</body>
+</html>
