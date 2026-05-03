@@ -11,20 +11,13 @@
         :root {
             --softest-pink: #fef9fb;
             --very-light-pink: #fdf3f6;
-            --light-pink: #f8e5ee;
-            --soft-pink: #f0d5e0;
-            --dusty-rose: #e0b8c8;
-            --muted-rose: #c995a8;
-            --rose-gold: #c49aaa;
-            --deep-rose: #a87080;
             --text-dark: #3d2c33;
             --text-medium: #5a404a;
-            --text-light: #7a5a65;
+            --deep-rose: #a87080;
+            --muted-rose: #c995a8;
+            --rose-gold: #c49aaa;
             --white: #ffffff;
-            --gold-accent: #d4b896;
-            --gold-light: #e8d5c4;
             --shadow-soft: 0 4px 20px rgba(160, 110, 130, 0.12);
-            --shadow-medium: 0 8px 32px rgba(140, 90, 110, 0.15);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -32,7 +25,7 @@
 
         body {
             font-family: 'Cormorant Garamond', Georgia, serif;
-            background: linear-gradient(180deg, var(--softest-pink) 0%, var(--very-light-pink) 25%, #fef6f8 50%, var(--very-light-pink) 75%, var(--softest-pink) 100%);
+            background: linear-gradient(180deg, #fff5f7 0%, #ffeff3 30%, #fef0f4 50%, #ffeff3 70%, #fff5f7 100%);
             background-attachment: fixed;
             color: var(--text-dark);
             min-height: 100vh;
@@ -46,7 +39,7 @@
         }
 
         /* ========== FLOATING HEARTS BACKGROUND ========== */
-        #hearts-container {
+        #hearts-bg {
             position: fixed;
             top: 0;
             left: 0;
@@ -57,7 +50,7 @@
             overflow: hidden;
         }
 
-        .heart {
+        .heart-bg {
             position: absolute;
             pointer-events: none;
             opacity: 0;
@@ -65,20 +58,22 @@
             animation: heartFloat linear infinite;
         }
 
-        .heart::before {
+        .heart-bg::before {
             content: "❤";
             display: block;
             font-size: inherit;
             line-height: 1;
         }
 
-        .heart:nth-child(odd)   { color: #e8b4c4; }
-        .heart:nth-child(3n)    { color: #d49aaa; }
-        .heart:nth-child(4n)    { color: #f0c4d4; }
-        .heart:nth-child(5n)    { color: #c995a8; }
-        .heart:nth-child(7n)    { color: #ddb4c4; }
-        .heart:nth-child(8n)    { color: #eac4d0; }
-        .heart:nth-child(11n)   { color: #f5d0dc; }
+        /* Pink and red hearts only */
+        .heart-bg:nth-child(odd)   { color: #e91e63; }
+        .heart-bg:nth-child(3n)    { color: #ff1744; }
+        .heart-bg:nth-child(4n)    { color: #f06292; }
+        .heart-bg:nth-child(5n)    { color: #d81b60; }
+        .heart-bg:nth-child(7n)    { color: #ec407a; }
+        .heart-bg:nth-child(8n)    { color: #ff4081; }
+        .heart-bg:nth-child(11n)   { color: #c2185b; }
+        .heart-bg:nth-child(13n)   { color: #e91e63; }
 
         @keyframes heartFloat {
             0% {
@@ -86,23 +81,23 @@
                 opacity: 0;
             }
             3% {
-                opacity: 0.45;
-            }
-            20% {
-                transform: translateY(85vh) translateX(18px) rotate(12deg) scale(0.75);
                 opacity: 0.5;
             }
+            20% {
+                transform: translateY(85vh) translateX(20px) rotate(15deg) scale(0.75);
+                opacity: 0.55;
+            }
             40% {
-                transform: translateY(60vh) translateX(-12px) rotate(-8deg) scale(0.9);
-                opacity: 0.48;
+                transform: translateY(60vh) translateX(-15px) rotate(-10deg) scale(0.9);
+                opacity: 0.5;
             }
             60% {
-                transform: translateY(35vh) translateX(22px) rotate(15deg) scale(1);
-                opacity: 0.42;
+                transform: translateY(35vh) translateX(25px) rotate(18deg) scale(1);
+                opacity: 0.45;
             }
             80% {
-                transform: translateY(12vh) translateX(-8px) rotate(-5deg) scale(0.85);
-                opacity: 0.3;
+                transform: translateY(12vh) translateX(-10px) rotate(-8deg) scale(0.85);
+                opacity: 0.35;
             }
             95% {
                 opacity: 0.1;
@@ -113,21 +108,76 @@
             }
         }
 
-        .heart.pulse::before {
-            animation: heartPulse 2s ease-in-out infinite;
+        /* ========== FLOATING HEARTS OVER LETTER ========== */
+        #hearts-over {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 10;
+            overflow: hidden;
         }
 
-        @keyframes heartPulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.4); }
+        .heart-over {
+            position: absolute;
+            pointer-events: none;
+            opacity: 0;
+            will-change: transform, opacity;
+            animation: heartOverFloat linear infinite;
+        }
+
+        .heart-over::before {
+            content: "❤";
+            display: block;
+            font-size: inherit;
+            line-height: 1;
+        }
+
+        .heart-over:nth-child(odd)   { color: #ff1744; }
+        .heart-over:nth-child(3n)    { color: #e91e63; }
+        .heart-over:nth-child(4n)    { color: #f06292; }
+        .heart-over:nth-child(5n)    { color: #ff4081; }
+        .heart-over:nth-child(7n)    { color: #d81b60; }
+        .heart-over:nth-child(8n)    { color: #ec407a; }
+        .heart-over:nth-child(11n)   { color: #c2185b; }
+
+        @keyframes heartOverFloat {
+            0% {
+                transform: translateY(110vh) translateX(0) rotate(0deg) scale(0.4);
+                opacity: 0;
+            }
+            5% {
+                opacity: 0.6;
+            }
+            25% {
+                transform: translateY(80vh) translateX(30px) rotate(20deg) scale(0.7);
+                opacity: 0.65;
+            }
+            50% {
+                transform: translateY(50vh) translateX(-20px) rotate(-15deg) scale(0.95);
+                opacity: 0.6;
+            }
+            75% {
+                transform: translateY(20vh) translateX(15px) rotate(10deg) scale(0.8);
+                opacity: 0.45;
+            }
+            95% {
+                opacity: 0.15;
+            }
+            100% {
+                transform: translateY(-10vh) translateX(0) rotate(0deg) scale(0.4);
+                opacity: 0;
+            }
         }
 
         /* ========== LETTER ========== */
         .letter-wrapper {
             position: relative;
-            z-index: 2;
+            z-index: 5;
             width: 100%;
-            max-width: 680px;
+            max-width: 700px;
             opacity: 0;
             transform: translateY(30px) scale(0.98);
             animation: letterReveal 1.2s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
@@ -141,7 +191,7 @@
             background: var(--white);
             border: 2px solid rgba(210, 170, 185, 0.5);
             border-radius: 24px;
-            padding: 52px 44px;
+            padding: 48px 40px;
             position: relative;
             box-shadow:
                 0 0 0 8px rgba(245, 225, 235, 0.35),
@@ -153,61 +203,61 @@
         /* Corner hearts */
         .corner-heart {
             position: absolute;
-            font-size: 1.2rem;
-            opacity: 0.45;
-            animation: cornerPulse 2.5s ease-in-out infinite;
+            font-size: 1.3rem;
+            opacity: 0.5;
+            animation: cornerPulse 2s ease-in-out infinite;
         }
-        .corner-heart.tl { top: 14px; left: 18px; animation-delay: 0s; }
-        .corner-heart.tr { top: 14px; right: 18px; animation-delay: 0.6s; }
-        .corner-heart.bl { bottom: 14px; left: 18px; animation-delay: 1.2s; }
-        .corner-heart.br { bottom: 14px; right: 18px; animation-delay: 1.8s; }
+        .corner-heart.tl { top: 12px; left: 16px; animation-delay: 0s; color: #e91e63; }
+        .corner-heart.tr { top: 12px; right: 16px; animation-delay: 0.5s; color: #ff1744; }
+        .corner-heart.bl { bottom: 12px; left: 16px; animation-delay: 1s; color: #f06292; }
+        .corner-heart.br { bottom: 12px; right: 16px; animation-delay: 1.5s; color: #d81b60; }
 
         @keyframes cornerPulse {
-            0%, 100% { opacity: 0.3; transform: scale(1); }
-            50% { opacity: 0.7; transform: scale(1.25); }
+            0%, 100% { opacity: 0.35; transform: scale(1); }
+            50% { opacity: 0.7; transform: scale(1.3); }
         }
 
-        /* Side floating hearts on the letter */
+        /* Side hearts */
         .side-heart {
             position: absolute;
-            font-size: 1rem;
-            opacity: 0.35;
-            animation: sideFloat 3s ease-in-out infinite;
+            font-size: 1.1rem;
+            opacity: 0.4;
+            animation: sideFloat 2.5s ease-in-out infinite;
         }
-        .side-heart.l1 { left: -28px; top: 20%; animation-delay: 0s; }
-        .side-heart.l2 { left: -22px; top: 55%; animation-delay: 1s; }
-        .side-heart.l3 { left: -30px; top: 80%; animation-delay: 2s; }
-        .side-heart.r1 { right: -28px; top: 15%; animation-delay: 0.5s; }
-        .side-heart.r2 { right: -22px; top: 50%; animation-delay: 1.5s; }
-        .side-heart.r3 { right: -30px; top: 75%; animation-delay: 2.5s; }
+        .side-heart.l1 { left: -26px; top: 18%; animation-delay: 0s; color: #ff1744; }
+        .side-heart.l2 { left: -20px; top: 45%; animation-delay: 0.8s; color: #e91e63; }
+        .side-heart.l3 { left: -28px; top: 72%; animation-delay: 1.6s; color: #f06292; }
+        .side-heart.r1 { right: -26px; top: 12%; animation-delay: 0.4s; color: #d81b60; }
+        .side-heart.r2 { right: -20px; top: 40%; animation-delay: 1.2s; color: #ff4081; }
+        .side-heart.r3 { right: -28px; top: 68%; animation-delay: 2s; color: #ec407a; }
 
         @keyframes sideFloat {
             0%, 100% { transform: translateY(0) scale(1); opacity: 0.3; }
-            50% { transform: translateY(-8px) scale(1.2); opacity: 0.55; }
+            50% { transform: translateY(-10px) scale(1.25); opacity: 0.6; }
         }
 
         .letter-inner {
             border: 1px dashed rgba(200, 160, 175, 0.35);
             border-radius: 16px;
-            padding: 40px 32px;
+            padding: 36px 28px;
             position: relative;
         }
 
-        /* Inner decorative hearts */
+        /* Inner tiny hearts */
         .inner-heart {
             position: absolute;
-            font-size: 0.85rem;
-            opacity: 0.25;
-            animation: innerPulse 4s ease-in-out infinite;
+            font-size: 0.8rem;
+            opacity: 0.3;
+            animation: innerPulse 3s ease-in-out infinite;
         }
-        .inner-heart.i1 { top: 10px; left: 15px; animation-delay: 0s; }
-        .inner-heart.i2 { top: 10px; right: 15px; animation-delay: 1.3s; }
-        .inner-heart.i3 { bottom: 10px; left: 20px; animation-delay: 2.6s; }
-        .inner-heart.i4 { bottom: 10px; right: 20px; animation-delay: 0.8s; }
+        .inner-heart.i1 { top: 8px; left: 12px; animation-delay: 0s; color: #ff1744; }
+        .inner-heart.i2 { top: 8px; right: 12px; animation-delay: 1s; color: #e91e63; }
+        .inner-heart.i3 { bottom: 8px; left: 18px; animation-delay: 2s; color: #f06292; }
+        .inner-heart.i4 { bottom: 8px; right: 18px; animation-delay: 0.5s; color: #d81b60; }
 
         @keyframes innerPulse {
             0%, 100% { opacity: 0.2; transform: scale(1); }
-            50% { opacity: 0.45; transform: scale(1.3); }
+            50% { opacity: 0.5; transform: scale(1.4); }
         }
 
         .letter-greeting {
@@ -216,16 +266,16 @@
             font-weight: 600;
             font-style: italic;
             color: var(--deep-rose);
-            margin-bottom: 24px;
+            margin-bottom: 22px;
             letter-spacing: 0.03em;
         }
 
         .letter-body {
             font-family: 'Cormorant Garamond', Georgia, serif;
-            font-size: clamp(1.1rem, 2.2vw, 1.3rem);
+            font-size: clamp(1.05rem, 2.2vw, 1.25rem);
             font-weight: 400;
             color: var(--text-medium);
-            line-height: 2.1;
+            line-height: 2;
             letter-spacing: 0.025em;
             text-align: center;
         }
@@ -236,29 +286,33 @@
             font-weight: 500;
         }
 
+        .letter-body strong {
+            color: var(--deep-rose);
+        }
+
         .letter-signature {
             font-family: 'Great Vibes', Georgia, cursive;
             font-size: clamp(2rem, 4.5vw, 2.8rem);
             color: var(--muted-rose);
-            margin-top: 32px;
+            margin-top: 28px;
             letter-spacing: 0.04em;
             opacity: 0.9;
         }
 
         .letter-hearts {
             display: inline-block;
-            margin-top: 18px;
-            font-size: 1.3rem;
+            margin-top: 16px;
+            font-size: 1.4rem;
             letter-spacing: 0.5em;
-            opacity: 0.6;
-            color: var(--rose-gold);
+            opacity: 0.7;
+            color: #e91e63;
             animation: heartsWiggle 2s ease-in-out infinite;
         }
 
         @keyframes heartsWiggle {
             0%, 100% { transform: translateX(0) scale(1); }
-            25% { transform: translateX(-4px) scale(1.1); }
-            75% { transform: translateX(4px) scale(1.1); }
+            25% { transform: translateX(-5px) scale(1.15); }
+            75% { transform: translateX(5px) scale(1.15); }
         }
 
         /* Click burst hearts */
@@ -267,28 +321,28 @@
             pointer-events: none;
             z-index: 100;
             font-size: 1.2rem;
-            animation: clickBurst 1s ease-out forwards;
+            animation: clickBurst 1.2s ease-out forwards;
         }
 
         @keyframes clickBurst {
             0% { opacity: 1; transform: translate(0, 0) scale(1); }
-            100% { opacity: 0; transform: translate(var(--dx), var(--dy)) scale(0.3) rotate(var(--rot)); }
+            100% { opacity: 0; transform: translate(var(--dx), var(--dy)) scale(0.2) rotate(var(--rot)); }
         }
 
         /* ========== RESPONSIVE ========== */
         @media screen and (max-width: 768px) {
             body { padding: 30px 16px; }
-            .letter-frame { padding: 36px 24px; border-radius: 20px; }
-            .letter-inner { padding: 28px 20px; }
+            .letter-frame { padding: 32px 22px; border-radius: 20px; }
+            .letter-inner { padding: 24px 18px; }
             .side-heart { display: none; }
         }
 
         @media screen and (max-width: 480px) {
             body { padding: 20px 12px; }
-            .letter-frame { padding: 28px 16px; border-radius: 18px; }
-            .letter-inner { padding: 20px 14px; }
-            .letter-greeting { margin-bottom: 18px; }
-            .letter-signature { margin-top: 24px; }
+            .letter-frame { padding: 24px 14px; border-radius: 18px; }
+            .letter-inner { padding: 18px 12px; }
+            .letter-greeting { margin-bottom: 16px; }
+            .letter-signature { margin-top: 20px; }
             .corner-heart { font-size: 1rem; }
             .inner-heart { display: none; }
         }
@@ -303,7 +357,10 @@
 <body>
 
     <!-- Floating hearts background -->
-    <div id="hearts-container" aria-hidden="true"></div>
+    <div id="hearts-bg" aria-hidden="true"></div>
+
+    <!-- Floating hearts over letter -->
+    <div id="hearts-over" aria-hidden="true"></div>
 
     <!-- Letter -->
     <div class="letter-wrapper">
@@ -328,66 +385,85 @@
 
                 <p class="letter-greeting">Dear Aunt,</p>
                 <p class="letter-body">
-                    On this magnificent day that the Lord has created especially for you, my heart overflows with gratitude. I pray that God will bless you with even stronger health, fill your soul with His grace, and allow you to taste the sweet fruits of all that you have sown with such love.
-                    Thank you for being the extraordinary aunt you are: a comforting presence, a beautiful example to follow, and endless generosity to me and my brothers.
-                    You are a ray of sunshine in my life. Know that I love you very much, sincerely and deeply. I will do everything not to disappoint you and to bring you the joy you so richly deserve.
-                    May the Almighty bless you abundantly and may this new year lead you from glory to glory, ever more radiant. In the precious name of Jesus Christ. <strong>Amen!</strong>
-                         <br><strong>Your loving son.</strong>
-                 </p>
+                    On this magnificent day that the Lord has created especially for you, my heart overflows with gratitude. I pray that God will bless you with even stronger health, fill your soul with His grace, and allow you to taste the sweet fruits of all that you have sown with such love.<br><br>
+                    Thank you for being the extraordinary aunt you are: a comforting presence, a beautiful example to follow, and endless generosity to me and my brothers.<br><br>
+                    You are a ray of sunshine in my life. Know that I love you very much, sincerely and deeply. I will do everything not to disappoint you and to bring you the joy you so richly deserve.<br><br>
+                    May the Almighty bless you abundantly and may this new year lead you from glory to glory, ever more radiant. In the precious name of Jesus Christ. <strong>Amen!</strong><br><br>
+                    <strong>Your loving son.</strong>
+                </p>
                 <p class="letter-signature">With all my love</p>
-                <div class="letter-hearts" aria-hidden="true">❤ ❤ ❤ ❤ ❤</div>
+                <div class="letter-hearts" aria-hidden="true">❤ ❤ ❤ ❤ ❤ ❤ ❤</div>
             </div>
         </div>
     </div>
 
     <script>
         (function() {
-            // ========== MANY FLOATING HEARTS ==========
-            const container = document.getElementById('hearts-container');
-            const heartCount = window.innerWidth < 480 ? 30 : 55;
-            const sizes = [12, 14, 16, 18, 20, 22, 24, 28, 32, 36, 40];
+            // ========== BACKGROUND HEARTS (many, behind letter) ==========
+            const bgContainer = document.getElementById('hearts-bg');
+            const bgCount = window.innerWidth < 480 ? 40 : 70;
+            const sizes = [12, 14, 16, 18, 20, 22, 24, 28, 32, 36, 40, 44];
 
-            for (let i = 0; i < heartCount; i++) {
+            for (let i = 0; i < bgCount; i++) {
                 const heart = document.createElement('div');
-                heart.classList.add('heart');
-                if (Math.random() > 0.5) heart.classList.add('pulse');
+                heart.classList.add('heart-bg');
 
                 const size = sizes[Math.floor(Math.random() * sizes.length)];
                 heart.style.fontSize = size + 'px';
                 heart.style.left = Math.random() * 98 + 1 + '%';
 
-                const duration = Math.random() * 12 + 10;
+                const duration = Math.random() * 10 + 10;
+                heart.style.animationDuration = duration + 's';
+                heart.style.animationDelay = Math.random() * 18 + 's';
+
+                bgContainer.appendChild(heart);
+            }
+
+            // ========== OVER HEARTS (many, floating over letter) ==========
+            const overContainer = document.getElementById('hearts-over');
+            const overCount = window.innerWidth < 480 ? 25 : 45;
+            const overSizes = [14, 16, 18, 20, 22, 24, 28, 32];
+
+            for (let i = 0; i < overCount; i++) {
+                const heart = document.createElement('div');
+                heart.classList.add('heart-over');
+
+                const size = overSizes[Math.floor(Math.random() * overSizes.length)];
+                heart.style.fontSize = size + 'px';
+                heart.style.left = Math.random() * 98 + 1 + '%';
+
+                const duration = Math.random() * 12 + 11;
                 heart.style.animationDuration = duration + 's';
                 heart.style.animationDelay = Math.random() * 20 + 's';
 
-                container.appendChild(heart);
+                overContainer.appendChild(heart);
             }
 
             // ========== CLICK HEART BURST ==========
             document.addEventListener('click', function(e) {
-                const count = 6 + Math.floor(Math.random() * 5);
+                const count = 8 + Math.floor(Math.random() * 6);
+                const colors = ['#ff1744', '#e91e63', '#f06292', '#d81b60', '#ff4081', '#ec407a', '#c2185b'];
                 for (let i = 0; i < count; i++) {
                     const h = document.createElement('div');
                     h.classList.add('click-heart');
                     h.textContent = '❤';
                     h.style.left = e.clientX + 'px';
                     h.style.top = e.clientY + 'px';
-                    h.style.color = ['#e8b4c4', '#d49aaa', '#f0c4d4', '#c995a8', '#ddb4c4'][Math.floor(Math.random() * 5)];
-                    h.style.fontSize = (14 + Math.random() * 18) + 'px';
+                    h.style.color = colors[Math.floor(Math.random() * colors.length)];
+                    h.style.fontSize = (14 + Math.random() * 22) + 'px';
 
                     const angle = (Math.PI * 2 * i) / count;
-                    const dist = 60 + Math.random() * 100;
+                    const dist = 70 + Math.random() * 120;
                     h.style.setProperty('--dx', Math.cos(angle) * dist + 'px');
                     h.style.setProperty('--dy', Math.sin(angle) * dist + 'px');
                     h.style.setProperty('--rot', (Math.random() * 360 - 180) + 'deg');
 
                     document.body.appendChild(h);
-                    setTimeout(() => h.remove(), 1000);
+                    setTimeout(() => h.remove(), 1200);
                 }
             });
 
-            // ========== CONSOLE EASTER EGG ==========
-            console.log('%c❤❤❤ With all my love ❤❤❤', 'font-size:1.3em;color:#c995a8;');
+            console.log('%c❤❤❤ With all my love ❤❤❤', 'font-size:1.3em;color:#e91e63;');
         })();
     </script>
 </body>
